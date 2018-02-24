@@ -14,7 +14,8 @@ const Spinner = (props) => {
 
 const styles = {
     spinnerStyle: {
-
+        flex: 1,
+        alignSelf: 'center',
     }
 };
 
