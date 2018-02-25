@@ -2,13 +2,13 @@ import React from 'react';
 import {View} from 'react-native';
 import firebase from 'firebase';
 import {LinearGradient} from 'expo'
-import {Header} from './src/components/common';
+import {Header, Button, Spinner} from './src/components/common';
 import LoginForm from './src/components/LoginForm';
 
 export default class App extends React.Component {
 
     state = {
-        loggedIn: false
+        loggedIn: null
     };
 
     componentWillMount() {
@@ -31,6 +31,28 @@ export default class App extends React.Component {
         });
     }
 
+    logoutUser() {
+        firebase.auth().signOut();
+    }
+
+    renderContent() {
+        if (this.state.loggedIn === true) {
+            return (
+                <Button onPress={this.logoutUser.bind(this)} style={{justifyContent: 'center'}} title={'Log Out'}/>
+            );
+        }
+        else if (this.state.loggedIn === false) {
+            return (
+                <LoginForm/>
+            );
+        }
+        else {
+            return (
+                <Spinner/>
+            );
+        }
+    }
+
     render() {
         return (
             <LinearGradient
@@ -38,7 +60,7 @@ export default class App extends React.Component {
                 start={[0, 0]}
                 end={[1, .8]}
                 style={styles.container}>
-                <LoginForm />
+                {this.renderContent()}
             </LinearGradient>
         );
     }

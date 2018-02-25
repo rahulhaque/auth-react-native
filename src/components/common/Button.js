@@ -1,16 +1,16 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {LinearGradient} from 'expo';
+import {Gradient} from './Gradient';
 
 const Button = (props) => {
 
-    const {onPress, title} = props;
+    const {onPress, title, style} = props;
 
     return (
-        <TouchableOpacity onPress={onPress} style={styles.buttonStyle}>
-            <LinearGradient colors={['#633991', '#c1156c']} start={[0, 0]} end={[1, 0]} style={{borderRadius:5}}>
+        <TouchableOpacity onPress={onPress} style={style || styles.buttonStyle}>
+            <Gradient colors={['#633991', '#c1156c']} start={[0, 0]} end={[1, 0]} style={{borderRadius:5}}>
                 <Text style={styles.textStyle}>{title}</Text>
-            </LinearGradient>
+            </Gradient>
         </TouchableOpacity>
     );
 };

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
 import {Text, View, Dimensions, Image, KeyboardAvoidingView} from 'react-native';
-import {Card, CardSection, Button, Input, Spinner} from './common';
+import {Card, CardSection, Button, Input, Spinner, Gradient} from './common';
 
 const {width, height} = Dimensions.get("window");
 
@@ -20,7 +20,7 @@ class LoginForm extends Component {
         this.setState({error: '', loadingSpinner: true});
 
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((res) => {
+            .then(() => {
                 this.setState({
                     email: '',
                     password: '',
