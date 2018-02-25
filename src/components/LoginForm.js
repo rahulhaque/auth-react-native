@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import {Card, CardSection, Button, Input, Spinner} from './common';
 import firebase from 'firebase';
+import {Text, View, Dimensions, Image, KeyboardAvoidingView} from 'react-native';
+import {Card, CardSection, Button, Input, Spinner} from './common';
+
+const {width, height} = Dimensions.get("window");
 
 class LoginForm extends Component {
 
@@ -17,8 +19,8 @@ class LoginForm extends Component {
 
         this.setState({error: '', loadingSpinner: true});
 
-        firebase.auth.signInWithEmailAndPassword(email, password)
-            .then(() => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((res) => {
                 this.setState({
                     email: '',
                     password: '',
@@ -26,15 +28,15 @@ class LoginForm extends Component {
                     loadingSpinner: false
                 });
             })
-            .catch(() => {
-                firebase.auth.createUserWithEmailAndPassword(email, password)
+            .catch((error) => {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
                     .then(() => {
                         this.setState({
                             error: 'User Created! Login Again',
                             loadingSpinner: false
                         });
                     })
-                    .catch(() => {
+                    .catch((error) => {
                         this.setState({
                             error: 'Authentication Failed!',
                             loadingSpinner: false
@@ -59,6 +61,8 @@ class LoginForm extends Component {
     render() {
         return (
             <View>
+                <Image style={styles.logoStyle} resizeMode={'stretch'}
+                       source={require('../assets/loginLogo.png')}/>
                 <Card>
                     <CardSection>
                         <Input
@@ -95,6 +99,7 @@ class LoginForm extends Component {
 
 const styles = {
     errorTextStyle: {
+        fontSize: 18,
         alignSelf: 'center',
         color: 'red',
         justifyContent: 'center',
@@ -102,7 +107,12 @@ const styles = {
     containerStyle: {
         flex: 1,
         justifyContent: 'center',
-    }
+    },
+    logoStyle: {
+        height: 80,
+        width: 180,
+        alignSelf: 'center',
+    },
 };
 
 export default LoginForm;

@@ -12,6 +12,7 @@ const Input = (props) => {
                 secureTextEntry={secureTextEntry}
                 autoCorrect={autoCorrect}
                 placeholder={placeholder}
+                underlineColorAndroid='transparent'
                 value={value}
                 onChangeText={onChangeText}
                 style={styles.inputStyle}
