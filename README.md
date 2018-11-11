@@ -15,3 +15,6 @@ Clone the repo or download zip file.
 
 `cd` into project directory. Run `npm i` then `npm start`
 
+## Screenshots
+
+![Compass](https://github.com/rahulhaque/auth-react-native/blob/master/screenshots/login_screen.png)
